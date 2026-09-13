@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Tomato - Food Delivery</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header class="navbar">
+    <div class="logo">🍅 Tomato</div>
+
+    <nav>
+        <a href="#home">Home</a>
+        <a href="#restaurants">Restaurants</a>
+        <a href="#about">About</a>
+    </nav>
+
+    <button class="login-btn">Login</button>
+</header>
+
+
+<!-- HERO SECTION -->
+
+<section class="hero" id="home">
+
+    <div class="hero-content">
+
+        <p class="small-text">FAST & FRESH DELIVERY</p>
+
+        <h1>
+            Delicious food,
+            <span>delivered to you.</span>
+        </h1>
+
+        <p class="hero-description">
+            Discover your favourite food from the best restaurants
+            around you and get it delivered to your doorstep.
+        </p>
+
+        <div class="search-box">
+
+            <input
+                type="text"
+                id="location"
+                placeholder="Enter your delivery location"
+            >
+
+            <button onclick="searchFood()">
+                Find Food
+            </button>
+
+        </div>
+
+    </div>
+
+    <div class="hero-image">
+        🍕
+    </div>
+
+</section>
+
+
+<!-- CATEGORIES -->
+
+<section class="section">
+
+    <h2>What's on your mind?</h2>
+
+    <div class="categories">
+
+        <div class="category" onclick="selectCategory('Pizza')">
+            <div class="category-icon">🍕</div>
+            <p>Pizza</p>
+        </div>
+
+        <div class="category" onclick="selectCategory('Burger')">
+            <div class="category-icon">🍔</div>
+            <p>Burger</p>
+        </div>
+
+        <div class="category" onclick="selectCategory('Biryani')">
+            <div class="category-icon">🍚</div>
+            <p>Biryani</p>
+        </div>
+
+        <div class="category" onclick="selectCategory('Dessert')">
+            <div class="category-icon">🍰</div>
+            <p>Dessert</p>
+        </div>
+
+        <div class="category" onclick="selectCategory('Drinks')">
+            <div class="category-icon">🥤</div>
+            <p>Drinks</p>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- RESTAURANTS -->
+
+<section class="section" id="restaurants">
+
+    <div class="section-header">
+
+        <div>
+            <h2>Popular restaurants</h2>
+            <p>Order from the best restaurants near you.</p>
+        </div>
+
+    </div>
+
+
+    <div class="restaurant-grid">
+
+        <div class="restaurant-card">
+
+            <div class="food-image pizza">
+                🍕
+            </div>
+
+            <div class="restaurant-info">
+
+                <h3>Pizza Paradise</h3>
+
+                <p class="food-type">
+                    Italian • Pizza • Fast Food
+                </p>
+
+                <div class="restaurant-details">
+                    <span class="rating">⭐ 4.5</span>
+                    <span>25-30 min</span>
+                </div>
+
+                <button onclick="orderFood('Pizza Paradise')">
+                    Order Now
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <div class="restaurant-card">
+
+            <div class="food-image burger">
+                🍔
+            </div>
+
+            <div class="restaurant-info">
+
+                <h3>Burger House</h3>
+
+                <p class="food-type">
+                    Burgers • Fast Food
+                </p>
+
+                <div class="restaurant-details">
+                    <span class="rating">⭐ 4.3</span>
+                    <span>20-25 min</span>
+                </div>
+
+                <button onclick="orderFood('Burger House')">
+                    Order Now
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <div class="restaurant-card">
+
+            <div class="food-image biryani">
+                🍛
+            </div>
+
+            <div class="restaurant-info">
+
+                <h3>Royal Biryani</h3>
+
+                <p class="food-type">
+                    Biryani • Indian
+                </p>
+
+                <div class="restaurant-details">
+                    <span class="rating">⭐ 4.7</span>
+                    <span>30-35 min</span>
+                </div>
+
+                <button onclick="orderFood('Royal Biryani')">
+                    Order Now
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- AI CHAT -->
+
+<section class="chat-section">
+
+    <div class="chat-container">
+
+        <div class="chat-header">
+
+            <div>
+                <h2>🍅 Tomato AI Assistant</h2>
+                <p>Need help with your order?</p>
+            </div>
+
+            <button onclick="clearChat()" class="clear-btn">
+                Clear
+            </button>
+
+        </div>
+
+
+        <div id="chatMessages" class="chat-messages">
+
+            <div class="message bot-message">
+                Hello! 👋 I'm Tomato's AI assistant.
+                How can I help you with your food order?
+            </div>
+
+        </div>
+
+
+        <div class="chat-input-area">
+
+            <input
+                type="text"
+                id="chatInput"
+                placeholder="Ask about your order..."
+                onkeydown="handleEnter(event)"
+            >
+
+            <button onclick="sendMessage()">
+                Send
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ABOUT -->
+
+<section class="about" id="about">
+
+    <h2>Why Tomato?</h2>
+
+    <div class="features">
+
+        <div>
+            <span>⚡</span>
+            <h3>Fast Delivery</h3>
+            <p>Get your favourite food delivered quickly.</p>
+        </div>
+
+        <div>
+            <span>🍽️</span>
+            <h3>Great Food</h3>
+            <p>Choose from a variety of delicious dishes.</p>
+        </div>
+
+        <div>
+            <span>🤖</span>
+            <h3>AI Support</h3>
+            <p>Our AI assistant helps you with your orders.</p>
+        </div>
+
+    </div>
+
+</section>
+
+
+<footer>
+
+    <div class="logo">🍅 Tomato</div>
+
+    <p>© 2026 Tomato. All rights reserved.</p>
+
+</footer>
+
+
+<script src="script.js"></script>
+
+</body>
+</html>

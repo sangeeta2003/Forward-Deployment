@@ -1,0 +1,536 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #fffaf7;
+    color: #222;
+}
+
+
+/* NAVBAR */
+
+.navbar {
+    height: 70px;
+    padding: 0 8%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    background: white;
+    border-bottom: 1px solid #eee;
+}
+
+.logo {
+    font-size: 25px;
+    font-weight: bold;
+    color: #e23744;
+}
+
+nav {
+    display: flex;
+    gap: 35px;
+}
+
+nav a {
+    text-decoration: none;
+    color: #333;
+    font-size: 15px;
+}
+
+nav a:hover {
+    color: #e23744;
+}
+
+.login-btn {
+    border: 1px solid #e23744;
+    background: white;
+    color: #e23744;
+
+    padding: 10px 20px;
+    border-radius: 8px;
+
+    cursor: pointer;
+}
+
+
+/* HERO */
+
+.hero {
+    min-height: 500px;
+
+    padding: 70px 8%;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    background: #fff1ed;
+}
+
+.hero-content {
+    max-width: 600px;
+}
+
+.small-text {
+    color: #e23744;
+    font-weight: bold;
+    letter-spacing: 2px;
+    font-size: 13px;
+}
+
+.hero h1 {
+    font-size: 55px;
+    line-height: 1.1;
+    margin: 20px 0;
+}
+
+.hero h1 span {
+    color: #e23744;
+}
+
+.hero-description {
+    color: #666;
+    font-size: 18px;
+    line-height: 1.6;
+    margin-bottom: 30px;
+}
+
+.search-box {
+    display: flex;
+    background: white;
+    padding: 7px;
+
+    border-radius: 10px;
+
+    max-width: 550px;
+
+    box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+}
+
+.search-box input {
+    flex: 1;
+
+    border: none;
+    outline: none;
+
+    padding: 15px;
+
+    font-size: 15px;
+}
+
+.search-box button {
+    background: #e23744;
+    color: white;
+
+    border: none;
+
+    padding: 0 25px;
+
+    border-radius: 7px;
+
+    cursor: pointer;
+}
+
+.hero-image {
+    font-size: 180px;
+}
+
+
+/* SECTIONS */
+
+.section {
+    padding: 70px 8%;
+}
+
+.section h2 {
+    font-size: 30px;
+    margin-bottom: 10px;
+}
+
+.section-header p {
+    color: #777;
+}
+
+
+/* CATEGORIES */
+
+.categories {
+    display: flex;
+    gap: 25px;
+    margin-top: 30px;
+    flex-wrap: wrap;
+}
+
+.category {
+    background: white;
+
+    width: 130px;
+    height: 130px;
+
+    border-radius: 15px;
+
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: center;
+
+    cursor: pointer;
+
+    box-shadow: 0 5px 20px rgba(0,0,0,0.06);
+
+    transition: 0.2s;
+}
+
+.category:hover {
+    transform: translateY(-5px);
+}
+
+.category-icon {
+    font-size: 50px;
+    margin-bottom: 10px;
+}
+
+
+/* RESTAURANTS */
+
+.restaurant-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 25px;
+
+    margin-top: 30px;
+}
+
+.restaurant-card {
+    background: white;
+
+    border-radius: 15px;
+
+    overflow: hidden;
+
+    box-shadow: 0 5px 20px rgba(0,0,0,0.07);
+}
+
+.food-image {
+    height: 200px;
+
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    font-size: 90px;
+}
+
+.pizza {
+    background: #ffe3d8;
+}
+
+.burger {
+    background: #fff0c9;
+}
+
+.biryani {
+    background: #e7f4d8;
+}
+
+.restaurant-info {
+    padding: 20px;
+}
+
+.restaurant-info h3 {
+    font-size: 21px;
+    margin-bottom: 8px;
+}
+
+.food-type {
+    color: #777;
+    font-size: 14px;
+}
+
+.restaurant-details {
+    display: flex;
+    justify-content: space-between;
+
+    margin: 15px 0;
+
+    font-size: 14px;
+
+    color: #777;
+}
+
+.rating {
+    color: #188038;
+    font-weight: bold;
+}
+
+.restaurant-info button {
+    width: 100%;
+
+    border: none;
+
+    background: #e23744;
+
+    color: white;
+
+    padding: 12px;
+
+    border-radius: 7px;
+
+    cursor: pointer;
+}
+
+
+/* CHAT */
+
+.chat-section {
+    padding: 70px 8%;
+
+    background: #f7f7f7;
+}
+
+.chat-container {
+    max-width: 800px;
+
+    margin: auto;
+
+    background: white;
+
+    border-radius: 15px;
+
+    overflow: hidden;
+
+    box-shadow: 0 5px 25px rgba(0,0,0,0.08);
+}
+
+.chat-header {
+    background: #e23744;
+
+    color: white;
+
+    padding: 20px;
+
+    display: flex;
+
+    justify-content: space-between;
+    align-items: center;
+}
+
+.chat-header h2 {
+    margin-bottom: 5px;
+}
+
+.chat-header p {
+    font-size: 14px;
+    opacity: 0.9;
+}
+
+.clear-btn {
+    background: white;
+
+    border: none;
+
+    color: #e23744;
+
+    padding: 8px 15px;
+
+    border-radius: 6px;
+
+    cursor: pointer;
+}
+
+.chat-messages {
+    height: 350px;
+
+    padding: 20px;
+
+    overflow-y: auto;
+
+    background: #fafafa;
+}
+
+.message {
+    max-width: 75%;
+
+    padding: 12px 15px;
+
+    margin-bottom: 15px;
+
+    border-radius: 10px;
+
+    line-height: 1.5;
+
+    font-size: 14px;
+}
+
+.bot-message {
+    background: #eeeeee;
+    margin-right: auto;
+}
+
+.user-message {
+    background: #e23744;
+
+    color: white;
+
+    margin-left: auto;
+}
+
+.chat-input-area {
+    display: flex;
+
+    padding: 15px;
+
+    border-top: 1px solid #eee;
+}
+
+.chat-input-area input {
+    flex: 1;
+
+    padding: 13px;
+
+    border: 1px solid #ddd;
+
+    outline: none;
+
+    border-radius: 7px 0 0 7px;
+}
+
+.chat-input-area button {
+    background: #e23744;
+
+    color: white;
+
+    border: none;
+
+    padding: 0 25px;
+
+    border-radius: 0 7px 7px 0;
+
+    cursor: pointer;
+}
+
+
+/* ABOUT */
+
+.about {
+    padding: 70px 8%;
+
+    text-align: center;
+}
+
+.about h2 {
+    font-size: 30px;
+
+    margin-bottom: 40px;
+}
+
+.features {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 30px;
+}
+
+.features div {
+    padding: 30px;
+
+    background: white;
+
+    border-radius: 15px;
+}
+
+.features span {
+    font-size: 40px;
+}
+
+.features h3 {
+    margin: 15px 0 10px;
+}
+
+.features p {
+    color: #777;
+}
+
+
+/* FOOTER */
+
+footer {
+    padding: 30px 8%;
+
+    background: #222;
+
+    color: white;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+}
+
+footer .logo {
+    color: white;
+}
+
+
+/* RESPONSIVE */
+
+@media (max-width: 800px) {
+
+    .navbar {
+        padding: 0 5%;
+    }
+
+    nav {
+        display: none;
+    }
+
+    .hero {
+        padding: 50px 5%;
+
+        flex-direction: column;
+
+        text-align: center;
+    }
+
+    .hero h1 {
+        font-size: 40px;
+    }
+
+    .hero-image {
+        font-size: 100px;
+
+        margin-top: 30px;
+    }
+
+    .search-box {
+        margin: auto;
+    }
+
+    .restaurant-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .features {
+        grid-template-columns: 1fr;
+    }
+
+    .section {
+        padding: 50px 5%;
+    }
+
+    .chat-section {
+        padding: 50px 5%;
+    }
+}
