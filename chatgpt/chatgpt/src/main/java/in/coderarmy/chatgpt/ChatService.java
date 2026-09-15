@@ -49,5 +49,5 @@ public class ChatService {
     public  void clearHistory(){
         history.clear();
     }
-    
+
 }
