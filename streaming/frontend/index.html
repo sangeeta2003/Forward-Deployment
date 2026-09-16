@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tomato Support</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --tomato-red: #e23744;
+      --tomato-red-dark: #c92d39;
+      --bg: #f7f7f8;
+      --card: #ffffff;
+      --text: #1f1f1f;
+      --muted: #777777;
+      --border: #ececec;
+      --user-bubble: #f1f1f3;
+    }
+
+    body {
+      min-height: 100vh;
+      font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--bg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      color: var(--text);
+    }
+
+    .chat-app {
+      width: min(100%, 720px);
+      height: min(760px, 90vh);
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      box-shadow: 0 18px 50px rgba(0, 0, 0, 0.08);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .header {
+      background: var(--tomato-red);
+      color: white;
+      padding: 18px 22px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .brand-icon {
+      width: 42px;
+      height: 42px;
+      background: white;
+      color: var(--tomato-red);
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      font-size: 22px;
+      flex-shrink: 0;
+    }
+
+    .brand-info h1 {
+      font-size: 19px;
+      font-weight: 700;
+      letter-spacing: -0.2px;
+    }
+
+    .brand-info p {
+      margin-top: 3px;
+      font-size: 12px;
+      opacity: 0.9;
+    }
+
+    .status {
+      margin-left: auto;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 12px;
+      opacity: 0.95;
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      background: #8df2a5;
+      border-radius: 50%;
+    }
+
+    .messages {
+      flex: 1;
+      overflow-y: auto;
+      padding: 24px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      scroll-behavior: smooth;
+    }
+
+    .welcome {
+      text-align: center;
+      color: var(--muted);
+      font-size: 12px;
+      margin-bottom: 4px;
+    }
+
+    .message-row {
+      display: flex;
+      width: 100%;
+    }
+
+    .message-row.user {
+      justify-content: flex-start;
+    }
+
+    .message-row.assistant {
+      justify-content: flex-end;
+    }
+
+    .message {
+      max-width: 74%;
+      padding: 12px 15px;
+      border-radius: 16px;
+      font-size: 14px;
+      line-height: 1.5;
+      word-wrap: break-word;
+      white-space: pre-wrap;
+    }
+
+    .message.user {
+      background: var(--user-bubble);
+      color: var(--text);
+      border-bottom-left-radius: 5px;
+    }
+
+    .message.assistant {
+      background: var(--tomato-red);
+      color: white;
+      border-bottom-right-radius: 5px;
+    }
+
+    .typing {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      min-height: 42px;
+    }
+
+    .typing span {
+      width: 7px;
+      height: 7px;
+      background: rgba(255,255,255,0.85);
+      border-radius: 50%;
+      animation: bounce 1.2s infinite ease-in-out;
+    }
+
+    .typing span:nth-child(2) {
+      animation-delay: 0.15s;
+    }
+
+    .typing span:nth-child(3) {
+      animation-delay: 0.3s;
+    }
+
+    @keyframes bounce {
+      0%, 60%, 100% { transform: translateY(0); }
+      30% { transform: translateY(-4px); }
+    }
+
+    .composer {
+      border-top: 1px solid var(--border);
+      background: white;
+      padding: 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .composer input {
+      flex: 1;
+      height: 46px;
+      border: 1px solid #dddddf;
+      border-radius: 13px;
+      padding: 0 15px;
+      font-size: 14px;
+      outline: none;
+      transition: 0.2s ease;
+      background: #fafafa;
+    }
+
+    .composer input:focus {
+      background: white;
+      border-color: var(--tomato-red);
+      box-shadow: 0 0 0 3px rgba(226, 55, 68, 0.08);
+    }
+
+    .composer button {
+      height: 46px;
+      min-width: 88px;
+      border: none;
+      border-radius: 13px;
+      background: var(--tomato-red);
+      color: white;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.2s ease;
+    }
+
+    .composer button:hover {
+      background: var(--tomato-red-dark);
+      transform: translateY(-1px);
+    }
+
+    .composer button:disabled {
+      opacity: 0.55;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .error {
+      color: #b42318;
+      background: #fff1f0;
+      border: 1px solid #ffd5d2;
+    }
+
+    @media (max-width: 640px) {
+      body {
+        padding: 0;
+        background: white;
+      }
+
+      .chat-app {
+        width: 100%;
+        height: 100vh;
+        border: none;
+        border-radius: 0;
+        box-shadow: none;
+      }
+
+      .status {
+        display: none;
+      }
+
+      .message {
+        max-width: 84%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="chat-app">
+
+    <header class="header">
+      <div class="brand-icon">🍅</div>
+
+      <div class="brand-info">
+        <h1>Tomato Support</h1>
+        <p>Customer Support Assistant</p>
+      </div>
+
+      <div class="status">
+        <span class="status-dot"></span>
+        Online
+      </div>
+    </header>
+
+    <main class="messages" id="messages">
+      <div class="welcome">Today</div>
+
+      <div class="message-row assistant">
+        <div class="message assistant">
+          Hi! Welcome to Tomato Support 🍅<br>
+          How can I help you with your order today?
+        </div>
+      </div>
+    </main>
+
+    <footer class="composer">
+      <input
+        id="messageInput"
+        type="text"
+        placeholder="Type your message..."
+        autocomplete="off"
+      />
+
+      <button id="sendButton">Send</button>
+    </footer>
+
+  </div>
+
+  <script>
+    const API_URL = "http://localhost:8080/api/chat";
+
+    const messagesContainer = document.getElementById("messages");
+    const messageInput = document.getElementById("messageInput");
+    const sendButton = document.getElementById("sendButton");
+
+    function addMessage(role, text, extraClass = "") {
+      const row = document.createElement("div");
+      row.className = `message-row ${role}`;
+
+      const bubble = document.createElement("div");
+      bubble.className = `message ${role} ${extraClass}`;
+      bubble.textContent = text;
+
+      row.appendChild(bubble);
+      messagesContainer.appendChild(row);
+
+      scrollToBottom();
+
+      return row;
+    }
+
+    function showTyping() {
+      const row = document.createElement("div");
+      row.className = "message-row assistant";
+      row.id = "typingIndicator";
+
+      const bubble = document.createElement("div");
+      bubble.className = "message assistant typing";
+
+      bubble.innerHTML = `
+        <span></span>
+        <span></span>
+        <span></span>
+      `;
+
+      row.appendChild(bubble);
+      messagesContainer.appendChild(row);
+
+      scrollToBottom();
+    }
+
+    function hideTyping() {
+      const typing = document.getElementById("typingIndicator");
+
+      if (typing) {
+        typing.remove();
+      }
+    }
+
+    function scrollToBottom() {
+      messagesContainer.scrollTop = messagesContainer.scrollHeight;
+    }
+
+  async function sendMessage() {
+
+    const message = messageInput.value.trim();
+
+    if (!message) {
+        return;
+    }
+
+    addMessage("user", message);
+
+    messageInput.value = "";
+    messageInput.focus();
+
+    sendButton.disabled = true;
+
+    showTyping();
+
+    let assistantRow = null;
+    let assistantBubble = null;
+    let hasStartedStreaming = false;
+
+    try {
+
+        const response = await fetch(API_URL, {
+            method: "POST",
+            headers: {
+                "Content-Type": "text/plain"
+            },
+            body: message
+        });
+
+        if (!response.ok) {
+            throw new Error("Request failed");
+        }
+
+        const reader = response.body.getReader();
+        const decoder = new TextDecoder();
+
+        while (true) {
+
+            const { value, done } = await reader.read();
+
+            if (done) {
+                break;
+            }
+
+            const chunk = decoder.decode(value, {
+                stream: true
+            });
+
+            if (!hasStartedStreaming) {
+
+                hideTyping();
+
+                assistantRow = addMessage(
+                    "assistant",
+                    ""
+                );
+
+                assistantBubble =
+                    assistantRow.querySelector(".message");
+
+                hasStartedStreaming = true;
+            }
+
+            assistantBubble.textContent += chunk;
+
+            scrollToBottom();
+        }
+
+        const remainingText = decoder.decode();
+
+        if (remainingText && assistantBubble) {
+            assistantBubble.textContent += remainingText;
+        }
+
+    } catch (error) {
+
+        hideTyping();
+
+        if (assistantRow) {
+            assistantRow.remove();
+        }
+
+        addMessage(
+            "assistant",
+            "Sorry, I couldn't connect to Tomato Support. Please try again.",
+            "error"
+        );
+
+    } finally {
+
+        hideTyping();
+
+        sendButton.disabled = false;
+    }
+  }
+
+    sendButton.addEventListener("click", sendMessage);
+
+    messageInput.addEventListener("keydown", function (event) {
+      if (event.key === "Enter") {
+        sendMessage();
+      }
+    });
+  </script>
+
+</body>
+</html>
