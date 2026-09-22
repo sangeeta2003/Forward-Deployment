@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Netflix Recommend</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header class="navbar">
+
+    <div class="logo">
+        NETFLIX<span>RECOMMEND</span>
+    </div>
+
+    <div class="nav-links">
+        <a href="#">Home</a>
+        <a href="#recommendations">Recommendations</a>
+    </div>
+
+</header>
+
+
+<section class="hero">
+
+    <div class="hero-content">
+
+        <p class="tag">AI MOVIE RECOMMENDATION</p>
+
+        <h1>Find your next<br>favorite movie.</h1>
+
+        <p class="hero-description">
+            Tell us what you're in the mood for and our AI will
+            find movies that match your interests.
+        </p>
+
+        <div class="search-container">
+
+            <input
+                type="text"
+                id="searchInput"
+                placeholder="Try: space adventure, romantic story..."
+            >
+
+            <button id="searchButton">
+                Search
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<main>
+
+    <section id="recommendations" class="movie-section">
+
+        <div class="section-header">
+
+            <div>
+                <p class="section-label">AI POWERED</p>
+                <h2 id="sectionTitle">Recommended For You</h2>
+            </div>
+
+        </div>
+
+        <div id="movieGrid" class="movie-grid">
+
+            <div class="empty-state">
+                <div class="empty-icon">🎬</div>
+                <h3>Discover something amazing</h3>
+                <p>
+                    Search for a movie, genre, theme or mood above.
+                </p>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <section id="similarSection" class="movie-section hidden">
+
+        <div class="section-header">
+
+            <div>
+                <p class="section-label">BASED ON YOUR SELECTION</p>
+                <h2 id="similarTitle">Similar Movies</h2>
+            </div>
+
+        </div>
+
+        <div id="similarGrid" class="movie-grid"></div>
+
+    </section>
+
+</main>
+
+
+<div id="loading" class="loading hidden">
+
+    <div class="spinner"></div>
+
+    <p>AI is finding the best matches...</p>
+
+</div>
+
+
+<div id="errorMessage" class="error-message hidden"></div>
+
+
+<footer>
+
+    <div class="footer-logo">
+        NETFLIX<span>RECOMMEND</span>
+    </div>
+
+    <p>
+        AI-powered semantic movie recommendation system
+    </p>
+
+</footer>
+
+
+<script src="script.js"></script>
+
+</body>
+</html>

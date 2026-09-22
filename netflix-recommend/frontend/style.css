@@ -1,0 +1,506 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background: #080808;
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    min-height: 100vh;
+}
+
+
+/* ================= NAVBAR ================= */
+
+.navbar {
+    height: 70px;
+    padding: 0 6%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    background: rgba(0, 0, 0, 0.95);
+
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.logo {
+    color: #e50914;
+    font-size: 24px;
+    font-weight: 900;
+    letter-spacing: -1px;
+}
+
+.logo span {
+    color: white;
+    font-size: 11px;
+    margin-left: 5px;
+    letter-spacing: 1px;
+}
+
+.nav-links {
+    display: flex;
+    gap: 30px;
+}
+
+.nav-links a {
+    color: #ddd;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.nav-links a:hover {
+    color: white;
+}
+
+
+/* ================= HERO ================= */
+
+.hero {
+    min-height: 580px;
+
+    display: flex;
+    align-items: center;
+
+    padding: 70px 8%;
+
+    background:
+        radial-gradient(
+            circle at 75% 40%,
+            rgba(229, 9, 20, 0.25),
+            transparent 35%
+        ),
+        linear-gradient(
+            90deg,
+            #080808 0%,
+            #080808 45%,
+            rgba(8, 8, 8, 0.7) 100%
+        );
+}
+
+.hero-content {
+    max-width: 700px;
+}
+
+.tag {
+    color: #e50914;
+    font-size: 13px;
+    font-weight: bold;
+    letter-spacing: 3px;
+    margin-bottom: 20px;
+}
+
+.hero h1 {
+    font-size: clamp(45px, 7vw, 80px);
+    line-height: 0.95;
+    letter-spacing: -4px;
+    margin-bottom: 25px;
+}
+
+.hero-description {
+    color: #aaa;
+    font-size: 18px;
+    line-height: 1.6;
+    max-width: 580px;
+    margin-bottom: 35px;
+}
+
+
+/* ================= SEARCH ================= */
+
+.search-container {
+    display: flex;
+    max-width: 650px;
+    height: 58px;
+}
+
+.search-container input {
+    flex: 1;
+
+    background: #181818;
+    border: 1px solid #444;
+
+    color: white;
+
+    padding: 0 20px;
+
+    font-size: 16px;
+
+    border-radius: 5px 0 0 5px;
+
+    outline: none;
+}
+
+.search-container input:focus {
+    border-color: #e50914;
+}
+
+.search-container button {
+    width: 130px;
+
+    border: none;
+
+    background: #e50914;
+    color: white;
+
+    font-size: 16px;
+    font-weight: bold;
+
+    cursor: pointer;
+
+    border-radius: 0 5px 5px 0;
+
+    transition: 0.2s;
+}
+
+.search-container button:hover {
+    background: #f40612;
+}
+
+
+/* ================= SECTIONS ================= */
+
+main {
+    padding: 30px 6% 80px;
+}
+
+.movie-section {
+    margin-top: 30px;
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+
+    margin-bottom: 25px;
+}
+
+.section-label {
+    color: #e50914;
+    font-size: 11px;
+    font-weight: bold;
+    letter-spacing: 2px;
+
+    margin-bottom: 6px;
+}
+
+.section-header h2 {
+    font-size: 28px;
+}
+
+
+/* ================= MOVIE GRID ================= */
+
+.movie-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(auto-fit, minmax(280px, 1fr));
+
+    gap: 20px;
+}
+
+
+/* ================= MOVIE CARD ================= */
+
+.movie-card {
+    background: #141414;
+
+    border-radius: 8px;
+
+    padding: 25px;
+
+    min-height: 260px;
+
+    border: 1px solid #252525;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.25s ease,
+        border-color 0.25s ease,
+        background 0.25s ease;
+
+    position: relative;
+
+    overflow: hidden;
+}
+
+.movie-card::before {
+    content: "";
+
+    position: absolute;
+
+    width: 130px;
+    height: 130px;
+
+    background: #e50914;
+
+    opacity: 0.08;
+
+    border-radius: 50%;
+
+    top: -60px;
+    right: -40px;
+}
+
+.movie-card:hover {
+    transform: translateY(-7px);
+
+    border-color: #e50914;
+
+    background: #1c1c1c;
+}
+
+.movie-number {
+    color: #555;
+
+    font-size: 45px;
+
+    font-weight: 900;
+
+    line-height: 1;
+
+    margin-bottom: 15px;
+}
+
+.movie-title {
+    font-size: 22px;
+
+    margin-bottom: 12px;
+}
+
+.movie-description {
+    color: #999;
+
+    font-size: 14px;
+
+    line-height: 1.6;
+
+    margin-bottom: 20px;
+}
+
+.movie-footer {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+}
+
+.match {
+    color: #46d369;
+
+    font-weight: bold;
+
+    font-size: 14px;
+}
+
+.similar-button {
+    border: 1px solid #555;
+
+    background: transparent;
+
+    color: white;
+
+    padding: 7px 12px;
+
+    border-radius: 4px;
+
+    cursor: pointer;
+
+    font-size: 12px;
+}
+
+.similar-button:hover {
+    background: white;
+    color: black;
+}
+
+
+/* ================= EMPTY STATE ================= */
+
+.empty-state {
+    grid-column: 1 / -1;
+
+    text-align: center;
+
+    padding: 80px 20px;
+
+    background: #111;
+
+    border-radius: 10px;
+
+    border: 1px solid #222;
+}
+
+.empty-icon {
+    font-size: 50px;
+
+    margin-bottom: 15px;
+}
+
+.empty-state h3 {
+    font-size: 22px;
+
+    margin-bottom: 10px;
+}
+
+.empty-state p {
+    color: #777;
+}
+
+
+/* ================= LOADING ================= */
+
+.loading {
+    position: fixed;
+
+    inset: 0;
+
+    background: rgba(0, 0, 0, 0.8);
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    z-index: 200;
+}
+
+.spinner {
+    width: 45px;
+    height: 45px;
+
+    border: 4px solid #333;
+
+    border-top-color: #e50914;
+
+    border-radius: 50%;
+
+    animation: spin 0.8s linear infinite;
+
+    margin-bottom: 20px;
+}
+
+@keyframes spin {
+
+    to {
+        transform: rotate(360deg);
+    }
+
+}
+
+
+/* ================= ERROR ================= */
+
+.error-message {
+    position: fixed;
+
+    bottom: 25px;
+    right: 25px;
+
+    background: #e50914;
+
+    color: white;
+
+    padding: 15px 20px;
+
+    border-radius: 5px;
+
+    z-index: 300;
+}
+
+
+/* ================= FOOTER ================= */
+
+footer {
+    border-top: 1px solid #222;
+
+    padding: 45px 6%;
+
+    color: #666;
+}
+
+.footer-logo {
+    color: #e50914;
+
+    font-size: 20px;
+
+    font-weight: 900;
+
+    margin-bottom: 10px;
+}
+
+.footer-logo span {
+    color: white;
+
+    font-size: 9px;
+
+    margin-left: 5px;
+}
+
+
+/* ================= UTILITIES ================= */
+
+.hidden {
+    display: none !important;
+}
+
+
+/* ================= MOBILE ================= */
+
+@media (max-width: 700px) {
+
+    .navbar {
+        padding: 0 20px;
+    }
+
+    .nav-links {
+        display: none;
+    }
+
+    .hero {
+        padding: 60px 20px;
+
+        min-height: 500px;
+    }
+
+    .hero h1 {
+        letter-spacing: -2px;
+    }
+
+    .hero-description {
+        font-size: 15px;
+    }
+
+    .search-container {
+        height: 52px;
+    }
+
+    .search-container button {
+        width: 100px;
+    }
+
+    main {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+    .movie-grid {
+        grid-template-columns: 1fr;
+    }
+
+}
