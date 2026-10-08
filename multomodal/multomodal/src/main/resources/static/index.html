@@ -1,0 +1,1152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Vision Chat</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Inter, -apple-system, BlinkMacSystemFont,
+            "Segoe UI", sans-serif;
+
+            background:
+                    radial-gradient(circle at top left,
+                    rgba(98, 80, 255, 0.20),
+                    transparent 35%),
+                    radial-gradient(circle at bottom right,
+                    rgba(0, 191, 255, 0.12),
+                    transparent 35%),
+                    #0b0d13;
+
+            color: #ffffff;
+
+            height: 100vh;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            overflow: hidden;
+        }
+
+
+        .app {
+
+            width: 94%;
+            max-width: 1000px;
+
+            height: 92vh;
+
+            background: rgba(18, 21, 30, 0.88);
+
+            border: 1px solid rgba(255, 255, 255, 0.08);
+
+            border-radius: 24px;
+
+            display: flex;
+            flex-direction: column;
+
+            overflow: hidden;
+
+            box-shadow:
+                    0 30px 80px rgba(0, 0, 0, 0.45);
+
+            backdrop-filter: blur(20px);
+        }
+
+
+        /* HEADER */
+
+        .header {
+
+            height: 76px;
+
+            padding: 0 25px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            border-bottom:
+                    1px solid rgba(255, 255, 255, 0.07);
+        }
+
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 13px;
+        }
+
+
+        .logo {
+
+            width: 42px;
+            height: 42px;
+
+            border-radius: 13px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 21px;
+
+            background:
+                    linear-gradient(
+                            135deg,
+                            #725cff,
+                            #3b82f6
+                    );
+
+            box-shadow:
+                    0 8px 25px rgba(93, 79, 255, 0.35);
+        }
+
+
+        .brand-text h2 {
+            font-size: 17px;
+            font-weight: 650;
+        }
+
+
+        .brand-text p {
+
+            font-size: 12px;
+            color: #9298aa;
+
+            margin-top: 3px;
+        }
+
+
+        .clear-button {
+
+            background: rgba(255, 255, 255, 0.06);
+
+            color: #b6bbca;
+
+            border:
+                    1px solid rgba(255, 255, 255, 0.08);
+
+            padding: 9px 14px;
+
+            border-radius: 10px;
+
+            cursor: pointer;
+
+            transition: 0.2s;
+        }
+
+
+        .clear-button:hover {
+            background: rgba(255, 255, 255, 0.10);
+            color: white;
+        }
+
+
+        /* CHAT AREA */
+
+        .chat {
+
+            flex: 1;
+
+            padding: 30px;
+
+            overflow-y: auto;
+
+            scroll-behavior: smooth;
+        }
+
+
+        .welcome {
+
+            max-width: 650px;
+
+            margin: 45px auto 30px;
+
+            text-align: center;
+        }
+
+
+        .welcome-icon {
+
+            width: 65px;
+            height: 65px;
+
+            margin: 0 auto 18px;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            border-radius: 20px;
+
+            font-size: 30px;
+
+            background:
+                    linear-gradient(
+                            135deg,
+                            #725cff,
+                            #3b82f6
+                    );
+
+            box-shadow:
+                    0 15px 40px rgba(80, 70, 255, 0.30);
+        }
+
+
+        .welcome h1 {
+
+            font-size: 29px;
+            margin-bottom: 10px;
+        }
+
+
+        .welcome p {
+
+            color: #9298aa;
+
+            line-height: 1.6;
+            font-size: 14px;
+        }
+
+
+        /* EXAMPLE CHIPS */
+
+        .examples {
+
+            display: flex;
+
+            justify-content: center;
+
+            flex-wrap: wrap;
+
+            gap: 9px;
+
+            margin-top: 22px;
+        }
+
+
+        .example {
+
+            border:
+                    1px solid rgba(255, 255, 255, 0.08);
+
+            background:
+                    rgba(255, 255, 255, 0.045);
+
+            color: #abb0c0;
+
+            border-radius: 20px;
+
+            padding: 8px 13px;
+
+            font-size: 12px;
+
+            cursor: pointer;
+
+            transition: 0.2s;
+        }
+
+
+        .example:hover {
+
+            color: white;
+
+            border-color:
+                    rgba(110, 90, 255, 0.5);
+
+            background:
+                    rgba(100, 80, 255, 0.10);
+        }
+
+
+        /* MESSAGES */
+
+        .message-row {
+
+            display: flex;
+
+            margin-bottom: 22px;
+        }
+
+
+        .message-row.user {
+            justify-content: flex-end;
+        }
+
+
+        .message-row.assistant {
+            justify-content: flex-start;
+        }
+
+
+        .message {
+
+            max-width: 72%;
+
+            padding: 14px 17px;
+
+            border-radius: 17px;
+
+            line-height: 1.55;
+
+            font-size: 14px;
+
+            white-space: pre-wrap;
+
+            word-break: break-word;
+        }
+
+
+        .user .message {
+
+            background:
+                    linear-gradient(
+                            135deg,
+                            #6956e8,
+                            #4d74e7
+                    );
+
+            border-bottom-right-radius: 5px;
+
+            box-shadow:
+                    0 6px 20px rgba(79, 74, 220, 0.18);
+        }
+
+
+        .assistant .message {
+
+            color: #e4e6ed;
+
+            background:
+                    rgba(255, 255, 255, 0.055);
+
+            border:
+                    1px solid rgba(255, 255, 255, 0.06);
+
+            border-bottom-left-radius: 5px;
+        }
+
+
+        .message-image {
+
+            display: block;
+
+            width: 100%;
+            max-width: 330px;
+            max-height: 250px;
+
+            object-fit: cover;
+
+            border-radius: 12px;
+
+            margin-bottom: 11px;
+
+            border:
+                    1px solid rgba(255, 255, 255, 0.12);
+        }
+
+
+        /* THINKING */
+
+        .thinking {
+
+            display: flex;
+            gap: 5px;
+
+            padding: 4px;
+        }
+
+
+        .thinking span {
+
+            width: 7px;
+            height: 7px;
+
+            background: #888fa1;
+
+            border-radius: 50%;
+
+            animation:
+                    bounce 1.2s infinite;
+        }
+
+
+        .thinking span:nth-child(2) {
+            animation-delay: 0.15s;
+        }
+
+
+        .thinking span:nth-child(3) {
+            animation-delay: 0.30s;
+        }
+
+
+        @keyframes bounce {
+
+            0%, 60%, 100% {
+                transform: translateY(0);
+                opacity: 0.5;
+            }
+
+            30% {
+                transform: translateY(-5px);
+                opacity: 1;
+            }
+        }
+
+
+        /* COMPOSER */
+
+        .composer-area {
+
+            padding: 15px 22px 22px;
+
+            background:
+                    linear-gradient(
+                            to top,
+                            rgba(11, 13, 19, 0.95),
+                            rgba(18, 21, 30, 0)
+                    );
+        }
+
+
+        .image-preview-container {
+
+            display: none;
+
+            width: fit-content;
+
+            margin-bottom: 10px;
+
+            position: relative;
+        }
+
+
+        .image-preview {
+
+            height: 80px;
+            max-width: 160px;
+
+            object-fit: cover;
+
+            border-radius: 11px;
+
+            border:
+                    1px solid rgba(255, 255, 255, 0.12);
+        }
+
+
+        .remove-image {
+
+            position: absolute;
+
+            right: -7px;
+            top: -7px;
+
+            width: 23px;
+            height: 23px;
+
+            border: none;
+
+            border-radius: 50%;
+
+            background: #303442;
+            color: white;
+
+            cursor: pointer;
+        }
+
+
+        .composer {
+
+            display: flex;
+            align-items: flex-end;
+
+            gap: 10px;
+
+            padding: 10px;
+
+            border-radius: 18px;
+
+            background:
+                    rgba(255, 255, 255, 0.055);
+
+            border:
+                    1px solid rgba(255, 255, 255, 0.09);
+
+            box-shadow:
+                    0 10px 30px rgba(0, 0, 0, 0.16);
+        }
+
+
+        textarea {
+
+            flex: 1;
+
+            resize: none;
+
+            max-height: 150px;
+            min-height: 43px;
+
+            border: none;
+            outline: none;
+
+            background: transparent;
+
+            color: white;
+
+            font-family: inherit;
+            font-size: 14px;
+
+            line-height: 1.5;
+
+            padding: 11px 5px;
+        }
+
+
+        textarea::placeholder {
+            color: #73798b;
+        }
+
+
+        .attach-button,
+        .send-button {
+
+            width: 43px;
+            height: 43px;
+
+            flex-shrink: 0;
+
+            border: none;
+
+            border-radius: 12px;
+
+            cursor: pointer;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            font-size: 18px;
+
+            transition: 0.2s;
+        }
+
+
+        .attach-button {
+
+            color: #b1b6c6;
+
+            background:
+                    rgba(255, 255, 255, 0.06);
+        }
+
+
+        .attach-button:hover {
+
+            color: white;
+
+            background:
+                    rgba(255, 255, 255, 0.10);
+        }
+
+
+        .send-button {
+
+            color: white;
+
+            background:
+                    linear-gradient(
+                            135deg,
+                            #725cff,
+                            #4f7aef
+                    );
+
+            box-shadow:
+                    0 6px 18px rgba(90, 75, 230, 0.30);
+        }
+
+
+        .send-button:hover {
+            transform: translateY(-1px);
+        }
+
+
+        .send-button:disabled {
+
+            cursor: not-allowed;
+
+            opacity: 0.5;
+
+            transform: none;
+        }
+
+
+        .hint {
+
+            text-align: center;
+
+            color: #606678;
+
+            font-size: 11px;
+
+            margin-top: 9px;
+        }
+
+
+        #fileInput {
+            display: none;
+        }
+
+
+        @media (max-width: 650px) {
+
+            .app {
+                width: 100%;
+                height: 100vh;
+                border-radius: 0;
+            }
+
+            .chat {
+                padding: 20px 14px;
+            }
+
+            .message {
+                max-width: 88%;
+            }
+
+            .composer-area {
+                padding: 12px;
+            }
+
+            .welcome {
+                margin-top: 20px;
+            }
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+<div class="app">
+
+    <!-- HEADER -->
+
+    <div class="header">
+
+        <div class="brand">
+
+            <div class="logo">
+                ✦
+            </div>
+
+            <div class="brand-text">
+
+                <h2>Vision Chat</h2>
+
+                <p>Text + Image AI Assistant</p>
+
+            </div>
+
+        </div>
+
+
+        <button
+                class="clear-button"
+                onclick="clearChat()">
+
+            Clear chat
+
+        </button>
+
+    </div>
+
+
+    <!-- CHAT -->
+
+    <div class="chat" id="chat">
+
+        <div class="welcome" id="welcome">
+
+            <div class="welcome-icon">
+                ✦
+            </div>
+
+            <h1>Ask me anything</h1>
+
+            <p>
+                Chat normally or upload an image and
+                ask questions about what you see.
+            </p>
+
+
+            <div class="examples">
+
+                <button
+                        class="example"
+                        onclick="useExample('Explain dependency injection in simple words')">
+
+                    Explain a concept
+
+                </button>
+
+                <button
+                        class="example"
+                        onclick="useExample('What is written in this screenshot?')">
+
+                    Read a screenshot
+
+                </button>
+
+                <button
+                        class="example"
+                        onclick="useExample('Why is the payment failing?')">
+
+                    Debug a screenshot
+
+                </button>
+
+                <button
+                        class="example"
+                        onclick="useExample('What do you see in this image?')">
+
+                    Understand an image
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- COMPOSER -->
+
+    <div class="composer-area">
+
+
+        <div
+                class="image-preview-container"
+                id="previewContainer">
+
+            <img
+                    class="image-preview"
+                    id="imagePreview">
+
+            <button
+                    class="remove-image"
+                    onclick="removeImage()">
+
+                ×
+
+            </button>
+
+        </div>
+
+
+        <div class="composer">
+
+
+            <input
+                    id="fileInput"
+                    type="file"
+                    accept="image/*"
+                    onchange="imageSelected(event)">
+
+
+            <button
+                    class="attach-button"
+                    onclick="document.getElementById('fileInput').click()"
+                    title="Attach image">
+
+                📎
+
+            </button>
+
+
+            <textarea
+                    id="messageInput"
+                    rows="1"
+                    placeholder="Message Vision Chat..."
+                    oninput="resizeTextarea(this)"
+                    onkeydown="handleKeyDown(event)"></textarea>
+
+
+            <button
+                    class="send-button"
+                    id="sendButton"
+                    onclick="sendMessage()">
+
+                ➜
+
+            </button>
+
+        </div>
+
+
+        <div class="hint">
+
+            Press Enter to send · Shift + Enter for new line
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+    var selectedFile = null;
+
+    var isSending = false;
+
+
+    function useExample(text) {
+
+        var input =
+            document.getElementById("messageInput");
+
+        input.value = text;
+
+        input.focus();
+
+        resizeTextarea(input);
+    }
+
+
+    function resizeTextarea(textarea) {
+
+        textarea.style.height = "auto";
+
+        textarea.style.height =
+            Math.min(textarea.scrollHeight, 150) + "px";
+    }
+
+
+    function handleKeyDown(event) {
+
+        if (event.key === "Enter" &&
+            !event.shiftKey) {
+
+            event.preventDefault();
+
+            sendMessage();
+        }
+    }
+
+    function imageSelected(event) {
+
+        selectedFile =
+            event.target.files[0];
+
+        if (!selectedFile) {
+            return;
+        }
+
+        document.getElementById(
+            "imagePreview"
+        ).src =
+            URL.createObjectURL(selectedFile);
+
+        document.getElementById(
+            "previewContainer"
+        ).style.display = "block";
+    }
+
+    function removeImage() {
+
+        selectedFile = null;
+
+        document.getElementById(
+            "fileInput"
+        ).value = "";
+
+        document.getElementById(
+            "previewContainer"
+        ).style.display = "none";
+    }
+
+    async function sendMessage() {
+
+        var input = document.getElementById("messageInput");
+
+        var message = input.value.trim();
+
+        if (!message && !selectedFile) {
+            return;
+        }
+
+
+        if (!message) {
+            message = "What do you see in this image?";
+        }
+
+
+        var fileForMessage = selectedFile;
+
+
+        hideWelcome();
+
+        addUserMessage(
+            message,
+            fileForMessage
+        );
+
+
+        input.value = "";
+
+        removeImage();
+
+
+        var loadingMessage =
+            addThinkingMessage();
+
+
+        var formData = new FormData();
+
+        formData.append(
+            "message",
+            message
+        );
+
+
+        if (fileForMessage) {
+
+            formData.append(
+                "image",
+                fileForMessage
+            );
+        }
+
+
+        try {
+
+            var response = await fetch(
+                "/api/chat",
+                {
+                    method: "POST",
+                    body: formData
+                }
+            );
+
+
+            var reply =
+                await response.text();
+
+
+            loadingMessage.remove();
+
+
+            addAssistantMessage(
+                reply
+            );
+
+        } catch (error) {
+
+            loadingMessage.remove();
+
+            addAssistantMessage(
+                "Unable to connect to server."
+            );
+        }
+    }
+
+
+    function addUserMessage(text, file) {
+
+        var row =
+            document.createElement("div");
+
+        row.className =
+            "message-row user";
+
+
+        var bubble =
+            document.createElement("div");
+
+        bubble.className = "message";
+
+
+        if (file) {
+
+            var image =
+                document.createElement("img");
+
+            image.className =
+                "message-image";
+
+            image.src =
+                URL.createObjectURL(file);
+
+            bubble.appendChild(image);
+        }
+
+
+        if (text) {
+
+            var textElement =
+                document.createElement("div");
+
+            textElement.textContent =
+                text;
+
+            bubble.appendChild(
+                textElement
+            );
+
+        } else {
+
+            var textElement =
+                document.createElement("div");
+
+            textElement.textContent =
+                "What do you see in this image?";
+
+            bubble.appendChild(
+                textElement
+            );
+        }
+
+
+        row.appendChild(bubble);
+
+        document.getElementById(
+            "chat"
+        ).appendChild(row);
+
+
+        scrollToBottom();
+    }
+
+
+    function addAssistantMessage(text) {
+
+        var row =
+            document.createElement("div");
+
+        row.className =
+            "message-row assistant";
+
+
+        var bubble =
+            document.createElement("div");
+
+        bubble.className =
+            "message";
+
+        bubble.textContent =
+            text;
+
+
+        row.appendChild(bubble);
+
+
+        document.getElementById(
+            "chat"
+        ).appendChild(row);
+
+
+        scrollToBottom();
+    }
+
+
+    function addThinkingMessage() {
+
+        var row =
+            document.createElement("div");
+
+        row.className =
+            "message-row assistant";
+
+
+        var bubble =
+            document.createElement("div");
+
+        bubble.className =
+            "message";
+
+
+        var thinking =
+            document.createElement("div");
+
+        thinking.className =
+            "thinking";
+
+
+        thinking.innerHTML =
+            "<span></span>" +
+            "<span></span>" +
+            "<span></span>";
+
+
+        bubble.appendChild(thinking);
+
+        row.appendChild(bubble);
+
+
+        document.getElementById(
+            "chat"
+        ).appendChild(row);
+
+
+        scrollToBottom();
+
+
+        return row;
+    }
+
+
+    function hideWelcome() {
+
+        var welcome =
+            document.getElementById("welcome");
+
+        if (welcome) {
+            welcome.style.display = "none";
+        }
+    }
+
+
+    function scrollToBottom() {
+
+        var chat =
+            document.getElementById("chat");
+
+        chat.scrollTop =
+            chat.scrollHeight;
+    }
+
+    async function clearChat() {
+
+        await fetch(
+            "/api/chat",
+            {
+                method: "DELETE"
+            }
+        );
+
+        location.reload();
+    }
+
+</script>
+
+</body>
+
+</html>
