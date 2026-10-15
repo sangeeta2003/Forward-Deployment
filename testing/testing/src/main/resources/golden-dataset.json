@@ -1,0 +1,81 @@
+[
+  {
+    "id": "rag-return-01",
+    "question": "How many days do I have to return a product?",
+    "expectedAnswer": "Products can be returned within 30 days of delivery.",
+    "expectedBehavior": "Explain that products may be returned within 30 days of delivery.",
+    "expectedTool": null,
+    "expectedToolArgument": null,
+    "expectedSource": "return-policy.txt"
+  },
+
+  {
+    "id": "rag-return-02",
+    "question": "I received an item three weeks ago. Is it too late to send it back?",
+    "expectedAnswer": "No. Three weeks is within the 30-day return window.",
+    "expectedBehavior": "Understand the paraphrased return question and explain that three weeks is inside the 30-day window.",
+    "expectedTool": null,
+    "expectedToolArgument": null,
+    "expectedSource": "return-policy.txt"
+  },
+
+  {
+    "id": "rag-refund-01",
+    "question": "How long does an approved refund take?",
+    "expectedAnswer": "Approved refunds are processed within 5 to 7 business days.",
+    "expectedBehavior": "Answer using the refund policy.",
+    "expectedTool": null,
+    "expectedToolArgument": null,
+    "expectedSource": "refund-policy.txt"
+  },
+
+  {
+    "id": "rag-shipping-01",
+    "question": "How long does standard shipping take?",
+    "expectedAnswer": "Standard orders generally arrive within 3 to 5 business days.",
+    "expectedBehavior": "Answer using the shipping policy.",
+    "expectedTool": null,
+    "expectedToolArgument": null,
+    "expectedSource": "shipping-policy.txt"
+  },
+
+  {
+    "id": "tool-status-01",
+    "question": "Where is order ORD-101?",
+    "expectedAnswer": "ORD-101 has been shipped and has not yet been delivered.",
+    "expectedBehavior": "Use the order status tool for ORD-101 and report the current status.",
+    "expectedTool": "getOrderStatus",
+    "expectedToolArgument": "ORD-101",
+    "expectedSource": null
+  },
+
+  {
+    "id": "tool-delivery-01",
+    "question": "When will ORD-101 arrive?",
+    "expectedAnswer": "ORD-101 is expected to be delivered on 15 October 2026.",
+    "expectedBehavior": "Use the delivery estimate tool for ORD-101.",
+    "expectedTool": "getDeliveryEstimate",
+    "expectedToolArgument": "ORD-101",
+    "expectedSource": null
+  },
+
+  {
+    "id": "tool-refund-01",
+    "question": "How much refund will I get for ORD-103?",
+    "expectedAnswer": "The approved refund amount for ORD-103 is INR 4999.",
+    "expectedBehavior": "Use the refund amount tool for ORD-103.",
+    "expectedTool": "getRefundAmount",
+    "expectedToolArgument": "ORD-103",
+    "expectedSource": null
+  },
+
+  {
+    "id": "combined-return-01",
+    "question": "Can I still return ORD-102?",
+    "expectedAnswer": "Yes. ORD-102 was delivered 20 days ago and is still within the 30-day return window.",
+    "expectedBehavior": "Use the return policy and order information together to determine return eligibility.",
+    "expectedTool": "getOrderStatus",
+    "expectedToolArgument": "ORD-102",
+    "expectedSource": "return-policy.txt"
+  }
+]
